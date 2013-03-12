@@ -1241,6 +1241,10 @@
     <!-- Description of NFC in the 1st level settings screen. [CHAR LIMIT=NONE] -->
     <string name="nsd_quick_toggle_summary">Allow apps on other devices to discover apps on this device</string>
 
+    <!-- Wi-Fi Calling Strings -->
+    <string name="wificall_toggle">Wi-Fi Calling</string>
+    <string name="wificall_settings">Wi-Fi Calling Settings</string>
+
     <!-- Wi-Fi Settings --> <skip />
     <!-- Used in the 1st-level settings screen to turn on Wi-Fi -->
     <string name="wifi_quick_toggle_title">Wi-Fi</string>

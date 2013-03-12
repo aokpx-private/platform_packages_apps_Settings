@@ -92,4 +92,19 @@
             android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
     </PreferenceScreen>
 
+    <CheckBoxPreference
+        android:key="wificall_toggle"
+        android:title="@string/wificall_toggle"
+        android:enabled="@bool/has_wificall_support" />
+
+    <PreferenceScreen
+        android:key="wificall_settings"
+        android:title="@string/wificall_settings"
+        android:enabled="@bool/has_wificall_support" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.movial.wificall"
+            android:targetClass="com.movial.wificall.Settings" />
+    </PreferenceScreen>
+
 </PreferenceScreen>

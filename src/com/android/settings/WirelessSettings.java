@@ -55,6 +55,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_NFC_POLLING_MODE = "nfc_polling_mode";
+    private static final String KEY_WIFICALL_TOGGLE = "wificall_toggle";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -65,6 +66,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private NfcAdapter mNfcAdapter;
     private NsdEnabler mNsdEnabler;
     private ListPreference mNfcPollingMode;
+    private Preference mWifiCallCheckBoxPreference;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -129,6 +131,19 @@ public class WirelessSettings extends SettingsPreferenceFragment
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam, mNfcPollingMode);
+        // wip; need to make this disable for non T-mo. Priority is getting this working. - <SyN>
+        Preference preference = new Preference(activity);
+        mWifiCallCheckBoxPreference = (Preference)Class.forName("com.movial.ipphone.WifiCallCheckBoxPreference").getConstructor(new Class[] {
+            Object.class
+        }).newInstance(new Object[] {
+            activity
+        });
+        mWifiCallCheckBoxPreference.setTitle("R.string.wificall_toggle");
+        mWifiCallCheckBoxPreference.getClass().getMethod("setValues", new Class[] {
+                Preference.class
+            }).invoke(mWifiCallCheckBoxPreference, new Object[] {
+                preference
+            });
 
         // Remove NSD checkbox by default
         getPreferenceScreen().removePreference(nsd);
@@ -253,6 +268,12 @@ public class WirelessSettings extends SettingsPreferenceFragment
         if (mNsdEnabler != null) {
             mNsdEnabler.resume();
         }
+        if(mWifiCallCheckBoxPreference != null)
+            try
+            {
+                mWifiCallCheckBoxPreference.getClass().getMethod("resume", new Class[0]).invoke(mWifiCallCheckBoxPreference, new Object[0]);
+            }
+            catch(Exception exception1) { }
     }
 
     @Override
@@ -266,6 +287,12 @@ public class WirelessSettings extends SettingsPreferenceFragment
         if (mNsdEnabler != null) {
             mNsdEnabler.pause();
         }
+        if(mWifiCallCheckBoxPreference != null)
+            try
+            {
+                mWifiCallCheckBoxPreference.getClass().getMethod("pause", new Class[0]).invoke(mWifiCallCheckBoxPreference, new Object[0]);
+            }
+            catch(Exception exception) { }
     }
 
     @Override

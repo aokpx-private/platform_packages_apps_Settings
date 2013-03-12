@@ -37,4 +37,7 @@
 
     <!-- Add option to add CDMA tools -->
     <bool name="is_sprint_device">false</bool>
+
+    <!-- T-Mobile WiFi-Calling -->
+    <bool name="has_wificall_support">false</bool>
 </resources>
